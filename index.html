@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubra filmes que combinam com você usando nosso recomendador inteligente.">
+  <title>CineMatch | Descubra seu próximo filme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="#" class="logo">
+      <span class="logo-icon">▶</span>
+      CINE<span>MATCH</span>
+    </a>
+
+    <nav class="navigation">
+      <a href="#inicio">Início</a>
+      <a href="#descobrir">Descobrir</a>
+      <a href="#catalogo">Filmes</a>
+      <a href="#favoritos">Favoritos <span id="favoriteCount">0</span></a>
+    </nav>
+
+    <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menu">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content">
+        <span class="eyebrow">SEU PRÓXIMO FILME ESTÁ AQUI</span>
+        <h1>Não sabe o que assistir?<br><span>Deixe a gente escolher.</span></h1>
+        <p>Descubra filmes incríveis de acordo com seu humor, seus gostos e suas preferências.</p>
+        <a href="#descobrir" class="primary-button">Encontrar meu filme <span>→</span></a>
+        <div class="hero-stats">
+          <div><strong>20+</strong><small>Filmes disponíveis</small></div>
+          <div><strong>06</strong><small>Gêneros diferentes</small></div>
+          <div><strong>100%</strong><small>Gratuito</small></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-glow"></div>
+        <div class="poster poster-back">
+          <img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Poster de Oppenheimer">
+        </div>
+        <div class="poster poster-front">
+          <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Poster de Duna">
+        </div>
+        <div class="floating-tag">✦ Descobertas para você</div>
+      </div>
+    </section>
+
+    <section class="recommendation-section section" id="descobrir">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">RECOMENDAÇÃO PERSONALIZADA</span>
+          <h2>Qual é o seu <span>clima hoje?</span></h2>
+          <p>Escolha um gênero e deixe o CineMatch encontrar uma opção.</p>
+        </div>
+      </div>
+
+      <div class="genre-grid" id="genreGrid">
+        <button class="genre-card active" data-genre="Todos">
+          <span>🎬</span><strong>Todos</strong>
+        </button>
+        <button class="genre-card" data-genre="Ação">
+          <span>💥</span><strong>Ação</strong>
+        </button>
+        <button class="genre-card" data-genre="Comédia">
+          <span>😂</span><strong>Comédia</strong>
+        </button>
+        <button class="genre-card" data-genre="Romance">
+          <span>❤️</span><strong>Romance</strong>
+        </button>
+        <button class="genre-card" data-genre="Terror">
+          <span>👻</span><strong>Terror</strong>
+        </button>
+        <button class="genre-card" data-genre="Ficção">
+          <span>🚀</span><strong>Ficção</strong>
+        </button>
+        <button class="genre-card" data-genre="Drama">
+          <span>🎭</span><strong>Drama</strong>
+        </button>
+      </div>
+
+      <div class="recommend-action">
+        <div>
+          <h3>Pronto para descobrir?</h3>
+          <p>Vamos encontrar um filme para sua próxima sessão.</p>
+        </div>
+        <button class="primary-button" id="recommendButton">Recomendar filme ✨</button>
+      </div>
+
+      <div id="recommendationResult" class="recommendation-result hidden">
+        <div class="result-label">✦ SUA RECOMENDAÇÃO</div>
+        <div id="recommendationContent"></div>
+        <button class="secondary-button" id="anotherRecommendation">Quero outra sugestão ↻</button>
+      </div>
+    </section>
+
+    <section class="catalog-section section" id="catalogo">
+      <div class="section-heading catalog-heading">
+        <div>
+          <span class="eyebrow">NOSSO CATÁLOGO</span>
+          <h2>Explore os <span>filmes</span></h2>
+          <p>Encontre uma história que combine com você.</p>
+        </div>
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="search" id="searchInput" placeholder="Buscar filme..." aria-label="Buscar filme">
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter-button selected" data-filter="Todos">Todos</button>
+        <button class="filter-button" data-filter="Ação">Ação</button>
+        <button class="filter-button" data-filter="Comédia">Comédia</button>
+        <button class="filter-button" data-filter="Romance">Romance</button>
+        <button class="filter-button" data-filter="Terror">Terror</button>
+        <button class="filter-button" data-filter="Ficção">Ficção</button>
+        <button class="filter-button" data-filter="Drama">Drama</button>
+      </div>
+
+      <div class="movie-grid" id="movieGrid"></div>
+      <p class="empty-message hidden" id="emptyMessage">Nenhum filme encontrado. Tente outra pesquisa.</p>
+    </section>
+
+    <section class="favorites-section section" id="favoritos">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">SUA COLEÇÃO</span>
+          <h2>Meus <span>favoritos</span></h2>
+          <p>Seus filmes preferidos reunidos em um só lugar.</p>
+        </div>
+      </div>
+      <div class="movie-grid" id="favoritesGrid"></div>
+      <p class="empty-message" id="favoritesEmpty">♡ Você ainda não salvou nenhum filme. Explore o catálogo e adicione seus favoritos!</p>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="movieModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal" aria-label="Fechar">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <a href="#inicio" class="logo">▶ CINE<span>MATCH</span></a>
+    <p>Seu próximo filme favorito começa aqui.</p>
+    <small>Projeto desenvolvido com HTML, CSS e JavaScript.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
